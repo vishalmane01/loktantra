@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #004d40;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-weight:500;
+           
+            text-align: left;
+        }
+
+        table th {
+
+            background-color: #004d40;
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .search-bar input, .search-bar button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+        }
+
+        .search-bar button {
+            background-color: #004d40;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #00332b;
+        }
+
+        .status {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .btn {
+            display: flex;
+            justify-content: end;
+            align-items: end;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #004d40;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            table th, table td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar input, .search-bar button {
+                flex: unset;
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            table th, table td {
+                padding: 6px;
+                font-size: 12px;
+            }
+
+            .status {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>मतदान केंद्र (Polling Booth Management)</h1>
+    </div>
+
+    <div class="container">
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search Booth" id="search-booth">
+            <button onclick="searchBooth()">शोधा (Search)</button>
+            <button onclick="resetTable()">रीसेट (Reset)</button>
+            <button onclick="exportTable()">Export (Excel)</button>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status">
+            <strong>Refresh polling status</strong>
+        </div>
+
+        <!-- Booth Table -->
+        <div style="overflow-x: auto;">
+            <table id="booth-table">
+                <thead>
+                    <tr>
+                        <th>अनु क्र.</th>
+                        <th>मतदान केंद्र</th>
+                        <th>एकूण</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>महात्मा फुले हायस्कूल, पश्चिम बाजूकडील खोली क्र. 3</td>
+                        <td>813</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>महात्मा फुले हायस्कूल, मराठी शाखा खोली क्र. 1</td>
+                        <td>668</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>महात्मा फुले हायस्कूल, पश्चिम बाजूकडील खोली क्र. 4</td>
+                        <td>1068</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn">
+                <a href="/main.html">
+                    
+                <button >Back </button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024-2026 All Rights Reserved.
+    </div>
+
+    <script>
+        function searchBooth() {
+            const input = document.getElementById('search-booth').value.toLowerCase();
+            const table = document.getElementById('booth-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(input)) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? '' : 'none';
+            }
+        }
+
+        function resetTable() {
+            const rows = document.getElementById('booth-table').getElementsByTagName('tr');
+            for (let i = 1; i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
+            document.getElementById('search-booth').value = '';
+        }
+
+        function exportTable() {
+            alert('Export to Excel functionality coming soon!');
+        }
+    </script>
+</body>
+</html>
