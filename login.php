@@ -3,9 +3,8 @@ $title = "Login | Loktantra";
 // $fn->nonAuthPage();
 ?>
 <head>
-    <title>
-        Login | Loktantra
-    </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Loktantra</title>
     <link rel="stylesheet" href="styles/login.css">
 </head>
     <div>
